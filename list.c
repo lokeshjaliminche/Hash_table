@@ -1,14 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define HASHMAP 10
-
-struct node
-{
-    int data;
-    struct node *next;
-};
-
-struct node *hash_table[HASHMAP];
+#include "list.h"
 
 struct node *insert(struct node *head, int data)
 {
@@ -69,41 +61,3 @@ void display(struct node *head)
     }
 }
 
-int hash(int data)
-{
-    int key = data % HASHMAP;
-}
-struct node *insert_hash(int data)
-{
-    int key = hash(data);
-    hash_table[key] = insert(hash_table[key], data);
-}
-
-void display_hash()
-{
-    for (int i = 0; i < HASHMAP; i++)
-    {
-        printf("for key %d\n", i);
-        display(hash_table[i]);
-    }
-
-}
-void init(void)
-{
-    for (int i = 0; i < HASHMAP; i++)
-    {
-        hash_table[i] = NULL;
-    }
-}
-int main()
-{
-    init();
-    insert_hash(10);
-    insert_hash(10);
-    insert_hash(10);
-    insert_hash(11);
-    insert_hash(12);
-    insert_hash(13);
-    insert_hash(14);
-    display_hash();
-}

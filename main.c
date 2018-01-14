@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define HASHMAP 10
 
 struct node
 {
@@ -7,6 +8,7 @@ struct node
     struct node *next;
 };
 
+struct node *hash_table[HASHMAP];
 
 struct node *insert(struct node *head, int data)
 {
@@ -60,7 +62,6 @@ void display(struct node *head)
     struct node *temp;
     temp = head;
 
-    printf("list\n");
     while (temp)
     {
         printf("%d\n", temp->data);
@@ -68,15 +69,41 @@ void display(struct node *head)
     }
 }
 
+int hash(int data)
+{
+    int key = data % HASHMAP;
+}
+struct node *insert_hash(int data)
+{
+    int key = hash(data);
+    hash_table[key] = insert(hash_table[key], data);
+}
+
+void display_hash()
+{
+    for (int i = 0; i < HASHMAP; i++)
+    {
+        printf("for key %d\n", i);
+        display(hash_table[i]);
+    }
+
+}
+void init(void)
+{
+    for (int i = 0; i < HASHMAP; i++)
+    {
+        hash_table[i] = NULL;
+    }
+}
 int main()
 {
-    struct node *head = NULL;
-    head = insert(head, 10);
-    head = insert(head, 11);
-    head = insert(head, 12);
-    head = insert(head, 13);
-    head = insert(head, 14);
-    display(head);
-    head = delete(head, 14);
-    display(head);
+    init();
+    insert_hash(10);
+    insert_hash(10);
+    insert_hash(10);
+    insert_hash(11);
+    insert_hash(12);
+    insert_hash(13);
+    insert_hash(14);
+    display_hash();
 }
